@@ -1,4 +1,5 @@
 using OtavioStore.Domain.StoreContext.Entities;
+using OtavioStore.Domain.StoreContext.Queries;
 
 namespace OtavioStore.Domain.StoreContext.Repositories
 {
@@ -7,5 +8,7 @@ namespace OtavioStore.Domain.StoreContext.Repositories
         bool CheckDocument(string document);
         bool CheckEmail(string email);
         void Save(Customer customer);
+
+        CustomerOrdersCountResult GetCustomerOrdersCount(string document);
     }
 }

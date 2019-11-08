@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using OtavioStore.Domain.StoreContext.Entities;
-// using OtavioStore.Domain.StoreContext.Queries;
+using OtavioStore.Domain.StoreContext.Queries;
 using OtavioStore.Domain.StoreContext.Repositories;
 
 namespace OtavioStore.Tests
@@ -28,10 +28,10 @@ namespace OtavioStore.Tests
         //     throw new NotImplementedException();
         // }
 
-        // public CustomerOrdersCountResult GetCustomerOrdersCount(string document)
-        // {
-        //     throw new System.NotImplementedException();
-        // }
+        public CustomerOrdersCountResult GetCustomerOrdersCount(string document)
+        {
+            throw new System.NotImplementedException();
+        }
 
         // public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
         // {
