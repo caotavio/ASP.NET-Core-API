@@ -50,7 +50,10 @@ namespace OtavioStore.Domain.StoreContext.Handlers
             AddNotifications(customer.Notifications);
 
             if(Invalid)
-                return null;
+                return new CommandResult(
+                    false,
+                    "Please, provide the correct information",
+                    Notifications);
             
             //Persist client
             _repository.Save(customer);
@@ -59,7 +62,11 @@ namespace OtavioStore.Domain.StoreContext.Handlers
             _emailService.Send(email.Address, "tav@dev.io", "Welcome", "Welcome to Otavio Store!");
             
             //Return resul to the screen
-            return new CreateCustomerCommandResult(customer.Id, name.ToString(), email.Address);
+            return new CommandResult(true, "Welcome to Otavio Store", new {
+                Id = customer.Id,
+                Name = name.ToString(),
+                Email = email.Address
+            });
         }
 
         public ICommandResult Handle(AddAddressCommand command)

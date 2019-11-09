@@ -44,6 +44,14 @@ namespace OtavioStore.Infra.StoreContext.Repositories
                 .FirstOrDefault();
         }
 
+        public IEnumerable<ListCustomerQueryResult> Get()
+        {
+            return
+                _context
+                .Connection
+                .Query<ListCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer]", new { });
+        }
+
         public CustomerOrdersCountResult GetCustomerOrdersCount(string document)
         {
             return _context
@@ -55,30 +63,22 @@ namespace OtavioStore.Infra.StoreContext.Repositories
                 .FirstOrDefault();
         }
 
-        // public IEnumerable<ListCustomerQueryResult> Get()
-        // {
-        //     return
-        //         _context
-        //         .Connection
-        //         .Query<ListCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer]", new { });
-        // }
+        public GetCustomerQueryResult Get(Guid id)
+        {
+            return
+                _context
+                .Connection
+                .Query<GetCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer] WHERE [Id]=@id", new { id = id })
+                .FirstOrDefault();
+        }
 
-        // public GetCustomerQueryResult Get(Guid id)
-        // {
-        //     return
-        //         _context
-        //         .Connection
-        //         .Query<GetCustomerQueryResult>("SELECT [Id], CONCAT([FirstName], ' ', [LastName]) AS [Name], [Document], [Email] FROM [Customer] WHERE [Id]=@id", new { id = id })
-        //         .FirstOrDefault();
-        // }
-
-        // public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
-        // {
-        //     return
-        //         _context
-        //         .Connection
-        //         .Query<ListCustomerOrdersQueryResult>("", new { id = id });
-        // }
+        public IEnumerable<ListCustomerOrdersQueryResult> GetOrders(Guid id)
+        {
+            return
+                _context
+                .Connection
+                .Query<ListCustomerOrdersQueryResult>("", new { id = id });
+        }
 
         public void Save(Customer customer)
         {
